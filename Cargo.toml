@@ -1,0 +1,10 @@
+[package]
+name = "enigma-machine"
+version = "0.1.0"
+authors = ["Gregory Brooks <greg.brooks@gregox.com>"]
+edition = "2018"
+repository = "https://github.com/Gregox273/enigma-machine"
+
+
+[dependencies]
+toml = "0.5.8"
