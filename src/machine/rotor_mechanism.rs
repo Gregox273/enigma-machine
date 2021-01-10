@@ -18,10 +18,10 @@ impl RotorMechanism {
         assert!(rotors.len() >= MIN_ROTORS,
             "Error: mechanism requires at least {} rotors", MIN_ROTORS);
 
-        for (_i, rotor) in rotors.iter().enumerate() {
-            assert!(rotor.rotor_positions() == rotor_positions,
+        for rotor in rotors.iter() {
+            assert!(rotor.num_positions() == rotor_positions,
             "Error: {} position mechanism specified but {} position rotor was supplied",
-            rotor_positions, rotor.rotor_positions());
+            rotor_positions, rotor.num_positions());
         }
 
         RotorMechanism {
@@ -66,7 +66,7 @@ impl RotorMechanism {
         let mut contact_position: u8 = self.etw.translate_r_to_l(input);
 
         //Pass through rotors right to left
-        for (_i, rotor) in self.rotors.iter().enumerate() {
+        for rotor in self.rotors.iter() {
             // Transform to rotor reference frame
             contact_position =
                 (contact_position + rotor.get_rotor_position()) % self.rotor_positions;
@@ -83,7 +83,7 @@ impl RotorMechanism {
         contact_position = self.reflector.translate(contact_position);
 
         // Pass through rotors left to right
-        for (_i, rotor) in self.rotors.iter().enumerate().rev() {
+        for rotor in self.rotors.iter().rev() {
             // Transform to rotor reference frame
             contact_position =
                 (contact_position + rotor.get_rotor_position()) % self.rotor_positions;

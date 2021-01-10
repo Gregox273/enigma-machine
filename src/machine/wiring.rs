@@ -12,9 +12,10 @@ impl Wiring {
         assert!(map.len() <= (std::u8::MAX as usize) + 1,
             "Error: Wiring map too large to indexed by type \'u8\'");
 
-        for (_i, value) in map.iter().enumerate() {
+        for value in map.iter() {
             assert!((*value as usize) < map.len(),
-                "out-of-bounds value for wiring connection: \'{}\' of \'{}\'", value, map.len());
+                "out-of-bounds rotor position value for wiring connection: \'{}\' of \'{}\'",
+                value, map.len());
         }
         // TODO: check validity of mapping (should be 1 to 1 i.e. no repeats or missing values)?
         Wiring {
